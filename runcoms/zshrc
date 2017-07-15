@@ -19,6 +19,9 @@ fi
 # Set short hostname instead of FQDN
 export SHORTHOST=$(hostname -s)
 
+# Load private zshrc
+test -e "${HOME}/.zshrc_private" && source "${HOME}/.zshrc_private"
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -48,9 +51,6 @@ alias colorize_log="perl -pe 's/(DEBUG)/\\033[37m\$1\\033[0m\\0/g;' -pe 's/(INFO
 
 # Git (only need to run once)
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
-
-# Load private zshrc
-test -e "${HOME}/.zshrc_private" && source "${HOME}/.zshrc_private"
 
 # iTerm2 integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
