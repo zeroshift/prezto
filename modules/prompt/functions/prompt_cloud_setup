@@ -45,6 +45,12 @@ function prompt_cloud_precmd {
   if (( $+functions[git-info] )); then
       git-info
   fi
+
+  # Get Python environment information.
+  if (( $+functions[python-info] )); then
+      python-info
+  fi
+
 }
 
 function prompt_cloud_help {
@@ -106,15 +112,18 @@ function prompt_cloud_setup {
 
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
-  zstyle ':prezto:module:git:info:dirty' format "%%B%F{$secondary_color}]%f%%b %F{yellow}⚡%f"
+  zstyle ':prezto:module:git:info:dirty' format "%%B%F{$secondary_color}]%f%%b %F{yellow}*%f"
   zstyle ':prezto:module:git:info:clean' format "%B%F{$secondary_color}]%f%b"
-  zstyle ':prezto:module:git:info:branch' format "%%B%F{$secondary_color}[%f%%b%%B%F{$primary_color}%b%f%%b"
+  zstyle ':prezto:module:git:info:branch' format " %%B%F{$secondary_color}[%f%%b%%B%F{$primary_color}%b%f%%b"
   zstyle ':prezto:module:git:info:keys' format \
     'prompt' '%b%C%D' \
     'rprompt' ''
 
+  # Virtualenv name
+  zstyle ':prezto:module:python:info:virtualenv' format ' %%B%F{$secondary_color}(%f%F{yellow}%v%f%%B%F{$secondary_color})%f%b'
+
   # Define prompts.
-  PROMPT='%B%F{$primary_color}${prefix}%f%b  %B%F{$secondary_color}%c%f%b ${git_info:+${(e)git_info[prompt]}} '
+  PROMPT='%B%F{$primary_color}${prefix}%f%b  %B%F{$secondary_color}%c%f%b${(e)python_info[virtualenv]}${git_info:+${(e)git_info[prompt]}} '
   RPROMPT=''
 }
 

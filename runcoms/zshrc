@@ -5,9 +5,52 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Set zsh color
+if [[ ${USER} == "root" ]]; then
+    export COLOR_1="red"
+else
+    if [[ "$(hostname -s)" == "stormtrooper" ]]; then
+        export COLOR_1="green"
+    else
+        export COLOR_1="yellow"
+    fi
+fi
+
+# Set short hostname instead of FQDN
+export SHORTHOST=$(hostname -s)
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 # Customize to your needs...
+
+# Reverse search
+bindkey '^r' history-incremental-search-backward
+unsetopt share_history
+
+# EXPORTS
+export EDITOR='/usr/bin/vim'
+export VISUAL='/usr/bin/vim'
+
+# some more ls aliases
+alias ll='ls -lah'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Tmux
+#alias tmux='tmux -2'    # Force 256-bit color
+unset TMPDIR            # Stop making tmux attach to different sessions
+
+# Colorize Log Alias
+alias colorize_log="perl -pe 's/(DEBUG)/\\033[37m\$1\\033[0m\\0/g;' -pe 's/(INFO)/\\033[32m\$1\\033[0m\\0/g;' -pe 's/(WARNING)/\\033[33m\$1\\033[0m\\007/g;' -pe 's/(ERROR)/\\033[31m\$1\\033[0m\\007/g;' -pe 's/(CRITICAL)/\\033[1;31m\$1\\033[0m\\007/g;'"
+
+# Git (only need to run once)
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
+
+# Load private zshrc
+test -e "${HOME}/.zshrc_private" && source "${HOME}/.zshrc_private"
+
+# iTerm2 integration
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
