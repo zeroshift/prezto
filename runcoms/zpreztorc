@@ -33,7 +33,6 @@ zstyle ':prezto:load' pmodule \
   'history' \
   'directory' \
   'spectrum' \
-  'utility' \
   'completion' \
   'git' \
   'python' \
@@ -160,8 +159,8 @@ zstyle ':prezto:module:python:virtualenv' auto-switch 'yes'
 # SSH
 #
 
-# Set the SSH identities to load into the agent.
-zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'id_rsa2' 'id_github'
+# # Set the SSH identities to load into the agent.
+# zstyle ':prezto:module:ssh:load' identities 'id_rsa'
 
 #
 # Syntax Highlighting
