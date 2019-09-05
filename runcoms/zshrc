@@ -31,7 +31,8 @@ fi
 
 # Reverse search
 bindkey '^r' history-incremental-search-backward
-unsetopt share_history
+unsetopt share_history  # Don't use history in other terminals (i.e. don't press up arrow and get something you weren't expecting
+setopt inc_append_history  # Do save history from other terminals
 
 # EXPORTS
 export EDITOR='/usr/bin/vim'
