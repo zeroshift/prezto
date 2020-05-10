@@ -55,3 +55,6 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 
 # iTerm2 integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+#PATH
+export PATH=$PATH:~/.local/bin:~/go/bin
